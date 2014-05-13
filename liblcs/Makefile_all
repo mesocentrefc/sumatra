@@ -1,0 +1,29 @@
+
+SOURCES = _lcs.ext.1.c \
+		  _lcs.ext.2.c \
+		  _lcs.ext.3.c \
+		  banded_LCS_alignment.c  \
+		  sse_banded_LCS_alignment.c  \
+		  upperband.c
+         
+SRCS=$(SOURCES)
+
+         
+OBJECTS= $(patsubst %.c,%.o,$(SOURCES))
+
+LIBFILE= liblcs.a
+RANLIB=ranlib
+
+
+include ../global.mk
+
+all: $(LIBFILE)
+
+clean:
+	rm -rf $(OBJECTS) $(LIBFILE)
+	rm -f *.P
+	rm -f *.a
+
+$(LIBFILE): $(OBJECTS)
+	ar -cr $@ $?
+	$(RANLIB) $@
